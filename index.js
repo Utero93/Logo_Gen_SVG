@@ -1,4 +1,4 @@
-// Import packages needed for this application:
+// Import the necessary packagesneeded for this application:
 
 // Import Inquirer
 const inquirer = require('inquirer');
@@ -9,7 +9,7 @@ const fs = require('fs').promises; // Using fs.promises to make file operations 
 // Import shapes modules
 const {Triangle, Circle, Square} = require('./lib/shapes');
 
-//------------------------------------------------------
+//--------------********-------------------*********--------*****-----
 
 // Inquirer questions saved in an array of objects:
 const questions = [
@@ -44,7 +44,7 @@ const questions = [
   },
 ];
 
-//------------------------------------------------------
+//--------------********-------------------*********--------*****-----
 
 // Svg class w/constructor w/methods for setting text and shape elements and returning a working svg file
 class Svg {
@@ -83,7 +83,7 @@ class Svg {
   }
 }
 
-//------------------------------------------------------
+//--------------********-------------------*********--------*****-----
 
 // Async function to initialize app
 async function init() {
