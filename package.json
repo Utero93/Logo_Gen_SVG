@@ -1,0 +1,26 @@
+{
+  "name": "logo_gen_svg",
+  "version": "1.0.0",
+  "description": "Logo Generator for users ",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Utero93/Logo_Gen_SVG.git"
+  },
+  "author": "Angel Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Utero93/Logo_Gen_SVG/issues"
+  },
+  "homepage": "https://github.com/Utero93/Logo_Gen_SVG#readme",
+  "dependencies": {
+    "inquirer": "^9.2.12"
+  }
+}
