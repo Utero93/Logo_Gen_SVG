@@ -1,56 +1,67 @@
+
+// Import packages needed for this application:
+
+// Import Inquirer using npm install --save inquirer@^8.0.0 in terminal to access common js syntax like require('inquirer') and module.exports 
 const inquirer = require('inquirer');
-const fs = require('fs').promises; 
+
+// Import File System(fs)
+const fs = require('fs').promises; // Using fs.promises to ensure the files oeprate as promise-based
+
+// Import shapes modules created for the logos 
 const {Triangle, Circle, Square} = require('./lib/shapes');
 
+//-------------------------------------------------------------------------------\\
 
+// Inquirer questions saved in an array of objects:
 const questions = [
 
-
+// Enter text for the logo (Must not be more than 3 characters long).
   {
     type: 'input',
     name: 'text',
-    message: 'Enter text for the logo, it must be longer than 3 characters.'
+    message: 'Enter text for the logo (Cant extend past the length of 3 characters).'
   },
 
+// Enter a text color for the logo
   {
     type: 'input',
     name: 'textColor',
-    message: 'Enter the color for your text.'
+    message: 'Enter a text color.'
   },
 
+// Select a shape to design a logo
   {
     type: 'list',
     name: 'shape',
-    message: 'Select a shape for your specific logo.',
+    message: 'Select a shape for your logo.',
     choices: ['triangle', 'circle', 'square']
   },
 
-
+// Enter a shape color for the logo
   {
     type: 'input',
     name: 'shapeColor',
-    message: 'Enter a color for the shape.'
+    message: 'Enter a shape color.'
   },
 ];
 
+//-------------------------------------------------------------------------------\\
 
+// Svg class w/constructor w/methods for setting text and shape elements and returning a working svg file
 class Svg {
 
   constructor(){
-
-    this.textEl = ''; 
-    this.shapeEl = ''; 
-
+    this.textEl = ''; // initializes text element
+    this.shapeEl = ''; // initializes shape element
   }
 
   render(){
-
     return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">${this.shapeEl}${this.textEl}</svg>`
-
   }
 
   setText(shape, text, textColor){
 
+    // checks changes made to the shape and modifies the text y-coordinate so it fits better
 
     if(shape === "triangle"){
 
@@ -69,37 +80,36 @@ class Svg {
   }
 
   setShape(shape){
-
     this.shapeEl = shape.render();
-  
   }
 }
 
+//-------------------------------------------------------------------------------\\
 
-
-
+// Async function to initialize app
 async function init() {
-
   try {
 
-    const data = await prompt(questions);
+    // pass prompt questions here
+    const data = await inquirer.prompt(questions);
 
+    // ensuring user only enters up to 3 characters of text
     let text = '';
 
     if (data.text.length > 0 && data.text.length < 4){
 
-      text = data.text;
+      text = data.text; // outputs the valid character length
 
-    } else {
+    } else { // outputs the invalid character length
 
-      console.log('Invalid character length. Text for logo cannot be any more than 3 characters long.'); // error message
+      console.log('Invalid character length. Text for logo cannot extend the length of 3 characters.'); // error message when the requirements havent been satisified 
       
-      return;
+      return; // ends the function
     }
 
     let shapeElement;
 
-
+    // Create the appropriate shape element based on user selection
     switch (data.shape.toLowerCase()) {
       case 'triangle':
         shapeElement = new Triangle();
@@ -112,9 +122,9 @@ async function init() {
         break;
     }
     
-    shapeElement.setColor(data.shapeColor); 
+    shapeElement.setColor(data.shapeColor); // sets shapeColor based on user input
 
-
+    // console.log(shapeElement);
 
     const svgFile = new Svg ();
 
@@ -123,15 +133,17 @@ async function init() {
 
     const svgContent = svgFile.render();
 
-
+    // console.log(svgContent);
     
 
+    // Writes SVG file using fs.promises.writeFile
     await fs.writeFile('logo.svg', svgContent);
 
-    console.log('Created a logo.svg file.');
+    console.log('A logo.svg file has successfully been generated!');
   } catch (error) {
     console.error('Error:', error);
   }
 }
 
+// Function call to initialize app
 init();
