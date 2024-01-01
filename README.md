@@ -60,6 +60,7 @@ THEN a 300x200 pixel image is generated that matches the criteria entered by the
 
 
 ## Installation:
+```md
 1. Open the cloned repository in any source code editor e.g. Visual Studio Code.
 2. Open integrated terminal on index.js within VS Code.
 3. Input “node index.js” in the command line
@@ -68,6 +69,7 @@ THEN a 300x200 pixel image is generated that matches the criteria entered by the
 6. At any point, the user may rename the "logo.svg" file to the file name of their choice.
 7. (Optional) Regarding future use, you may alter the text of the questions within the index.js to best suit their needs.
 8. (Optional) The SVG Logo Maker serves as a basic template that doesnt limit any alterations to the files in order to create the best possible "logo.svg" file.
+```
 
 ## Author
 
